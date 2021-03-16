@@ -1,3 +1,6 @@
+var React = require('react');
+var angular = require('angular');
+
 angular.module('invoicing', [])
 
 // The default logo for the invoice
