@@ -4,7 +4,7 @@
   "description": "Create free and unlimited one off invoices using this little Invoicing app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "browserify -t [ babelify --presets [ @babel/preset-env @babel/preset-react ] ] ./js/main.js -o ./js/bundle.js && lite-server"
   },
   "repository": {
     "type": "git",
@@ -18,12 +18,15 @@
   "homepage": "https://github.com/emanu-dev/react-invoicing#readme",
   "devDependencies": {
     "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "@babel/preset-react": "^7.12.13",
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
+    "babelify": "^10.0.0",
     "browserify": "^17.0.0",
     "commitizen": "^4.2.3",
+    "create-react-class": "^15.7.0",
     "cz-conventional-changelog": "^3.3.0",
-    "@babel/preset-env": "^7.13.10",
     "husky": "^5.1.3",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1"
@@ -34,8 +37,7 @@
     }
   },
   "dependencies": {
-    "angular": "^1.4.4",
-    "babel-eslint": "^10.1.0",
+    "angular": "^1.5.3",
     "eslint": "^7.22.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
