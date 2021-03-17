@@ -1,9 +1,9 @@
 import info from './info';
-import items from './items';
+import item from './item';
 
 const Actions = {
     info, 
-    items,
+    item,
 }
 
 export default Actions;

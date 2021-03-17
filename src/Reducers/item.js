@@ -14,17 +14,19 @@ const defaultItems = [{
 
 const itemReducer = (state = defaultItems, action) => {
 	switch (action.type) {
-		case 'ITEM-ADD':
+		case 'SET':
+			return action.itemList;
+		case 'ADD':
 			return [
 				...state,
 				newItem
 			]
-		case 'ITEM-REMOVE':
+		case 'REMOVE':
 			return [
 				...state.slice(0, action.index),
 				...state.slice(action.index + 1)
 			]
-		case 'ITEM-UPDATE':
+		case 'UPDATE':
 			return [
 				...state.slice(0, action.index),
 				state[action.index] = {
