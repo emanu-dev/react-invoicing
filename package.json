@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "Create free and unlimited one off invoices using this little Invoicing app",
   "main": "index.js",
-  "watch" : {
+  "watch": {
     "bundle": "{js,bundle}/main.js"
   },
   "scripts": {
     "bundle": "browserify -t [ babelify --presets [ @babel/preset-env @babel/preset-react ] ] ./js/main.js -o ./js/bundle.js",
-    "watch" : "npm-watch",
-    "serve" : "lite-server"
+    "watch": "npm-watch",
+    "serve": "lite-server"
   },
   "repository": {
     "type": "git",
@@ -44,10 +44,14 @@
   "dependencies": {
     "angular": "^1.5.3",
     "eslint": "^7.22.0",
+    "ng-redux": "^4.4.3",
     "npm-watch": "^0.9.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react2angular": "^4.0.6"
+    "react-redux": "^7.2.2",
+    "react2angular": "^4.0.6",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   }
 }
