@@ -46,13 +46,29 @@ var Logo = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, Logo);
 
     _this = _super.call(this, props);
+    _this.imgInp = /*#__PURE__*/(0, _react.createRef)();
     _this.state = {
-      hide: false
+      hide: false,
+      logo: 'images/metaware_logo.png'
     };
     return _this;
   }
 
   _createClass(Logo, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      if (this.hasLogo()) {
+        this.setState({
+          logo: localStorage['logo']
+        });
+      }
+    }
+  }, {
+    key: "hasLogo",
+    value: function hasLogo() {
+      return !!localStorage['logo'];
+    }
+  }, {
     key: "toggleLogo",
     value: function toggleLogo() {
       this.setState({
@@ -60,18 +76,52 @@ var Logo = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
-    key: "render",
-    value: function render() {
+    key: "editLogo",
+    value: function editLogo() {
+      this.imgInp.current.click();
+    }
+  }, {
+    key: "readUrl",
+    value: function readUrl(input) {
       var _this2 = this;
 
-      return /*#__PURE__*/_react["default"].createElement("div", null, !this.state.hide && /*#__PURE__*/_react["default"].createElement("img", {
-        src: this.props.imgurl,
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          _this2.setState({
+            logo: e.target.result
+          });
+
+          localStorage['logo'] = e.target.result;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("input", {
+        type: "file",
+        ref: this.imgInp,
+        id: "imgInp",
+        onChange: function onChange(e) {
+          _this3.readUrl(e.target);
+        }
+      }), !this.state.hide && /*#__PURE__*/_react["default"].createElement("img", {
+        src: this.state.logo,
         width: this.props.width
       }), /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("a", {
-        href: "#"
-      }, "Edit Logo"), /*#__PURE__*/_react["default"].createElement("a", {
         onClick: function onClick() {
-          return _this2.toggleLogo(false);
+          return _this3.editLogo();
+        },
+        href: "#"
+      }, "Edit Logo "), /*#__PURE__*/_react["default"].createElement("a", {
+        onClick: function onClick() {
+          return _this3.toggleLogo(false);
         },
         href: "#"
       }, "".concat(this.state.hide ? 'Show' : 'Hide'), "logo")));
@@ -81,7 +131,7 @@ var Logo = /*#__PURE__*/function (_Component) {
   return Logo;
 }(_react.Component);
 
-_angular["default"].module('invoicing', []).component('logo', (0, _react2angular.react2angular)(Logo, ['imgurl', 'width'])) // The default logo for the invoice
+_angular["default"].module('invoicing', []).component('logo', (0, _react2angular.react2angular)(Logo, ['width'])) // The default logo for the invoice
 .constant('DEFAULT_LOGO', 'images/metaware_logo.png') // The invoice displayed when the user first uses the app
 .constant('DEFAULT_INVOICE', {
   tax: 13.00,
@@ -299,10 +349,9 @@ _angular["default"].module('invoicing', []).component('logo', (0, _react2angular
   _angular["default"].element(document).ready(function () {
     // Set focus
     document.getElementById('invoice-number').focus(); // Changes the logo whenever the input changes
-
-    document.getElementById('imgInp').onchange = function () {
-      readUrl(this);
-    };
+    // document.getElementById('imgInp').onchange = function () {
+    //   readUrl(this);
+    // };
   });
 }]);
 
