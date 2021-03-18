@@ -1,12 +1,12 @@
 const defaultInfo = {
 	invoice: {
 		tax: 13,
-		invoice_number: 15,
+		invoice_number: 10,
 	},
 	customer_info: {
 		name: "Mr. John Doe",
 		web_link: "John Doe Designs Inc.",
-		address1: "1 Infinite Loopab",
+		address1: "1 Infinite Loop",
 		address2: "Cupertino, California, US",
 		postal: "90210"
 	},
@@ -31,6 +31,8 @@ const infoReducer = (state = defaultInfo, action) => {
 					[action.key]: action.value
 				}
 			}
+		case 'INFO-RESET':
+			return defaultInfo;			
 		default:
 			return state;
 	}

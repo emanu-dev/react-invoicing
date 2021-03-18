@@ -55,6 +55,7 @@ const InfoArea = props => {
 					</InfoInput>
 				</div>
 				<div className="input-container">
+					{!props.state.printMode &&
 					<select 
 						onChange={(e) => props.dispatch(actions.currency.update(e.target.value))}>
 						{currencyList.map((currency, index) => (
@@ -64,7 +65,7 @@ const InfoArea = props => {
 								{currency.name}
 							</option>
 						))}
-					</select>
+					</select>}
 				</div>
 			</div>
 			<div className="col-xs-6 right">

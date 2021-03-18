@@ -18,7 +18,7 @@ const Item = props => {
 	return (
 		<div className="row invoice-item">
 			<div className="col-xs-1 remove-item-container">
-				<a
+			{!props.state.printMode && <a
 					className="btn btn-danger"
 					href='#'
 					onClick={
@@ -26,7 +26,7 @@ const Item = props => {
 							e.preventDefault();
 							props.dispatch(actions.item.remove(props.index))
 						}}
-				>[X]</a>
+				>[X]</a>}
 			</div>
 			<div className="col-xs-3 input-container">
 				<input

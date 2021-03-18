@@ -65,7 +65,8 @@ const ItemTable = props => {
 				<Item key={index} item={item} index={index}></Item>
 			))}
 			<div className="row invoice-item">
-				<div className="col-xs-12 add-item-container">
+			{!props.state.printMode &&
+			<div className="col-xs-12 add-item-container">
 					<a
 						className="btn btn-primary"
 						href='#'
@@ -76,7 +77,7 @@ const ItemTable = props => {
 							}
 						}
 					>[+]</a>
-				</div>
+				</div>}
 			</div>
 			<div className="row">
 				<div className="col-xs-10 text-right">Sub Total</div>

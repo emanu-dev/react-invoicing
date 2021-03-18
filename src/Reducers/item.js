@@ -35,6 +35,8 @@ const itemReducer = (state = defaultItems, action) => {
 				},
 				...state.slice(action.index + 1)
 			]
+		case 'RESET':
+			return defaultItems;
 		default:
 			return state;
 	}
