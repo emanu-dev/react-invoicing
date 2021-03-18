@@ -10,7 +10,6 @@ const InfoArea = props => {
 	const currencyList = props.state.currency.availableCurrency;
 
 	React.useEffect(() => {
-		console.log(localStorage['info']);
 		getInfo();
 	}, [])
 
