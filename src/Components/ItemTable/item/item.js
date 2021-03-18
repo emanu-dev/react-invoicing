@@ -4,6 +4,10 @@ import actions from '../../../Actions';
 
 const Item = props => {
 
+	const calculateDiscount = () => {
+		return(props.item.cost * props.item.qty * (props.item.discount/100))
+	}
+
 	return (
 		<div className="row invoice-item">
 			<div className="col-xs-1 remove-item-container">
@@ -15,9 +19,9 @@ const Item = props => {
 							e.preventDefault();
 							props.dispatch(actions.item.remove(props.index))
 						}}
-					>[X]</a>
+				>[X]</a>
 			</div>
-			<div className="col-xs-5 input-container">
+			<div className="col-xs-3 input-container">
 				<input
 					placeholder="Description"
 					value={props.item.description}
@@ -30,24 +34,34 @@ const Item = props => {
 				<input
 					size="4"
 					placeholder="Quantity"
-					value={props.item.qty} 
+					value={props.item.qty}
 					onChange={(e) => {
 						props.dispatch(actions.item.update(props.index, 'qty', e.target.value))
 					}}
-					/>
+				/>
 			</div>
 			<div className="col-xs-2 input-container">
 				<input
 					size="6"
 					placeholder="Cost"
-					value={props.item.cost.toFixed(2)}
+					value={props.item.cost}
 					onChange={(e) => {
 						props.dispatch(actions.item.update(props.index, 'cost', e.target.value))
-					}}				
+					}}
+				/>
+			</div>
+			<div className="col-xs-2 input-container">
+				<input
+					size="6"
+					placeholder="%"
+					value={props.item.discount}
+					onChange={(e) => {
+						props.dispatch(actions.item.update(props.index, 'discount', e.target.value))
+					}}
 				/>
 			</div>
 			<div className="col-xs-2 text-right input-container">
-				{props.item.cost * props.item.qty}
+				{(props.item.cost * props.item.qty - calculateDiscount()).toFixed(2)}
 			</div>
 		</div>
 	)

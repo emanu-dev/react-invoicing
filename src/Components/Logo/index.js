@@ -8,13 +8,16 @@ const Logo = (props) => {
 	const imgInp = React.useRef(null);
 
 	React.useEffect(() => {
+		console.log(hasLogo())
 		if (hasLogo()) {
 			setLogo(localStorage['logo']);
+		}else{
+			setLogo('images/metaware_logo.png');
 		}
 	}, [])
 
 	const hasLogo = () => {
-		return !!localStorage['logo'];
+		return !(localStorage['logo'] === '' || localStorage['logo'] === null || localStorage['logo'] == undefined);
 	};
 
 	const toggleLogo = () => {

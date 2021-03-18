@@ -20,14 +20,14 @@ const ItemTable = props => {
 	const invoiceSubTotal = () => {
 		var total = 0.00;
 		items.forEach((item) => {
-			total += (item.qty * item.cost);
+			total += (item.qty * item.cost - (item.cost * item.qty * (item.discount/100)));
 		});
 		
 		return total;
 	};
 
 	const getItems = () => {
-		if (localStorage['item'] === null) {
+		if (localStorage['item'] === '' || localStorage['item'] === null || localStorage['item'] == undefined) {
 			saveItems();
 		}else{
 			props.dispatch(actions.item.set(
@@ -52,9 +52,10 @@ const ItemTable = props => {
 		<div className="items-table">
 			<div className="row header">
 				<div className="col-xs-1">&nbsp;</div>
-				<div className="col-xs-5">Description</div>
+				<div className="col-xs-3">Description</div>
 				<div className="col-xs-2">Quantity</div>
 				<div className="col-xs-2">Cost $</div>
+				<div className="col-xs-2">Discount</div>
 				<div className="col-xs-2 text-right">Total</div>
 			</div>
 			{items.map((item, index) => (
@@ -68,7 +69,6 @@ const ItemTable = props => {
 						onClick={
 							(e) => {
 								e.preventDefault();
-								console.log('wassup')
 								props.dispatch(actions.item.add())
 							}
 						}
