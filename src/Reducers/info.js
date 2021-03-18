@@ -21,7 +21,9 @@ const defaultInfo = {
 
 const infoReducer = (state = defaultInfo, action) => {
 	switch (action.type) {
-		case 'UPDATE':
+		case 'INFO-SET':
+			return action.infoObject
+		case 'INFO-UPDATE':
 			return {
 				...state,
 				[action.info]: {
