@@ -2,14 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import NumberFormat from 'react-number-format';
 
-import Item from './item/item';
-import InfoInput from '../InfoInput/Container';
+import Item from './item';
+import InfoInput from '../InfoInput';
 import actions from '../../Actions';
 
 const ItemTable = props => {
 
-	let items = props.state.item;
-	let tax = props.state.info.invoice.tax;
+	const items = props.state.item;
+	const tax = props.state.info.invoice.tax;
+	const prefix = props.state.currency.symbol;
 
 	React.useEffect(()=>{
 		getItems();
@@ -57,7 +58,7 @@ const ItemTable = props => {
 				<div className="col-xs-3">Description</div>
 				<div className="col-xs-2">Quantity</div>
 				<div className="col-xs-2">Cost $</div>
-				<div className="col-xs-2">Discount</div>
+				<div className="col-xs-2">Discount %</div>
 				<div className="col-xs-2 text-right">Total</div>
 			</div>
 			{items.map((item, index) => (
@@ -84,7 +85,7 @@ const ItemTable = props => {
 						value={invoiceSubTotal()}
 						decimalScale={2}
 						displayType="text"
-						prefix={'$'}
+						prefix={prefix}
 					/>					
 				</div>
 			</div>
@@ -105,7 +106,7 @@ const ItemTable = props => {
 						value={calculateTax()}
 						decimalScale={2}
 						displayType="text"
-						prefix={'$'}
+						prefix={prefix}
 					/>
 				</div>
 			</div>
@@ -116,7 +117,7 @@ const ItemTable = props => {
 						value={calculateGrandTotal()}
 						decimalScale={2}
 						displayType="text"
-						prefix={'$'}
+						prefix={prefix}
 					/>
 				</div>
 			</div>

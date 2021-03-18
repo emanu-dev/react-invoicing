@@ -5,12 +5,14 @@ import NumberFormat from 'react-number-format';
 
 const Item = props => {
 
+	const prefix = props.state.currency.symbol;
+
 	const calculateDiscount = () => {
 		return (props.item.cost * props.item.qty * (props.item.discount / 100))
 	}
 
 	const removeFormatting = (string) => {
-		return parseFloat(string.substring(1));
+		return parseFloat(string.replace(prefix, ""));
 	}
 
 	return (
@@ -50,7 +52,7 @@ const Item = props => {
 					size="6"
 					placeholder="Cost"
 					value={props.item.cost}
-					prefix={'$'}
+					prefix={prefix}
 					isNumericString={true}
 					onChange={(e) => {
 						props.dispatch(actions.item.update(props.index, 'cost', removeFormatting(e.target.value)))
@@ -72,7 +74,7 @@ const Item = props => {
 					value={props.item.cost * props.item.qty - calculateDiscount()}
 					decimalScale={2}
 					displayType="text"
-					prefix={'$'}
+					prefix={prefix}
 				/>
 
 			</div>
