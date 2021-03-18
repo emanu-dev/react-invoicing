@@ -6,7 +6,7 @@ import actions from '../../Actions';
 const ActionArea = props => {
 
   const clearLocalStorage = () => {
-   	let confirmClear = confirm('Are you sure you would like to clear the invoice?');
+   	let confirmClear = window.confirm('Are you sure you would like to clear the invoice?');
    	if (confirmClear) {
       props.dispatch(actions.info.reset());
       props.dispatch(actions.item.reset());
