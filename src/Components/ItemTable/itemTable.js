@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import NumberFormat from 'react-number-format';
+
 import Item from './item/item';
 import InfoInput from '../InfoInput/Container';
 import actions from '../../Actions';
@@ -78,7 +80,12 @@ const ItemTable = props => {
 			<div className="row">
 				<div className="col-xs-10 text-right">Sub Total</div>
 				<div className="col-xs-2 text-right">
-					{invoiceSubTotal().toFixed(2)}
+					<NumberFormat 
+						value={invoiceSubTotal()}
+						decimalScale={2}
+						displayType="text"
+						prefix={'$'}
+					/>					
 				</div>
 			</div>
 			<div className="row">
@@ -94,13 +101,23 @@ const ItemTable = props => {
 					/>
 				</div>
 				<div className="col-xs-2 text-right">
-					{calculateTax().toFixed(2)}
+					<NumberFormat 
+						value={calculateTax()}
+						decimalScale={2}
+						displayType="text"
+						prefix={'$'}
+					/>
 				</div>
 			</div>
 			<div className="row">
 				<div className="col-xs-10 text-right">Grand Total:</div>
 				<div className="col-xs-2 text-right">
-					{calculateGrandTotal().toFixed(2)}
+					<NumberFormat 
+						value={calculateGrandTotal()}
+						decimalScale={2}
+						displayType="text"
+						prefix={'$'}
+					/>
 				</div>
 			</div>
 		</div>

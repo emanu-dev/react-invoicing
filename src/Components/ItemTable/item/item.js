@@ -1,11 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import actions from '../../../Actions';
+import NumberFormat from 'react-number-format';
 
 const Item = props => {
 
 	const calculateDiscount = () => {
-		return(props.item.cost * props.item.qty * (props.item.discount/100))
+		return (props.item.cost * props.item.qty * (props.item.discount / 100))
+	}
+
+	const removeFormatting = (string) => {
+		return parseFloat(string.substring(1));
 	}
 
 	return (
@@ -41,12 +46,14 @@ const Item = props => {
 				/>
 			</div>
 			<div className="col-xs-2 input-container">
-				<input
+				<NumberFormat
 					size="6"
 					placeholder="Cost"
 					value={props.item.cost}
+					prefix={'$'}
+					isNumericString={true}
 					onChange={(e) => {
-						props.dispatch(actions.item.update(props.index, 'cost', e.target.value))
+						props.dispatch(actions.item.update(props.index, 'cost', removeFormatting(e.target.value)))
 					}}
 				/>
 			</div>
@@ -61,7 +68,13 @@ const Item = props => {
 				/>
 			</div>
 			<div className="col-xs-2 text-right input-container">
-				{(props.item.cost * props.item.qty - calculateDiscount()).toFixed(2)}
+				<NumberFormat
+					value={props.item.cost * props.item.qty - calculateDiscount()}
+					decimalScale={2}
+					displayType="text"
+					prefix={'$'}
+				/>
+
 			</div>
 		</div>
 	)
