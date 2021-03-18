@@ -8,7 +8,6 @@ const Logo = (props) => {
 	const imgInp = React.useRef(null);
 
 	React.useEffect(() => {
-		console.log(hasLogo())
 		if (hasLogo()) {
 			setLogo(localStorage['logo']);
 		}else{
