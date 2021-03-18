@@ -17,7 +17,6 @@ const InfoInput = (props) => {
 				onChange={
 					(e) => {
 						props.dispatch(actions.info.update(props.info, props.name, e.target.value))
-						console.log(props.state)
 					}
 				}
 			/>

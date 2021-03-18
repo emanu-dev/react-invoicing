@@ -3,45 +3,20 @@ import { connect } from 'react-redux';
 
 import actions from '../../Actions';
 
-import InfoInput from '../InfoInput/Container';
+import InfoInput from '../InfoInput';
 
 const InfoArea = props => {
 
-	const [info, setInfo] = React.useState(props.state.info);
-	const currencyList = [
-		{
-			name: 'British Pound (£)',
-			symbol: '£'
-		},
-		{
-			name: 'Canadian Dollar ($)',
-			symbol: 'CAD $ '
-		},
-		{
-			name: 'Euro (€)',
-			symbol: '€'
-		},
-		{
-			name: 'Indian Rupee (₹)',
-			symbol: '₹'
-		},
-		{
-			name: 'Norwegian krone (kr)',
-			symbol: 'kr '
-		},
-		{
-			name: 'US Dollar ($)',
-			symbol: '$'
-		}
-	]
+	const currencyList = props.state.currency.availableCurrency;
 
 	React.useEffect(() => {
+		console.log(localStorage['info']);
 		getInfo();
 	}, [])
 
 	React.useEffect(() => {
 		saveInfo();
-	}, [info])
+	}, [props.state.info])
 
 	const getInfo = () => {
 		if (localStorage['info'] === '' || localStorage['info'] === null || localStorage['info'] == undefined) {
@@ -54,11 +29,10 @@ const InfoArea = props => {
 	}
 
 	const saveInfo = () => {
-		localStorage['info'] = JSON.stringify(info)
+		localStorage['info'] = JSON.stringify(props.state.info)
 	}
 
 	return (
-
 		<div className="row infos">
 			<div className="col-xs-6">
 				<div className="input-container">
@@ -82,9 +56,14 @@ const InfoArea = props => {
 					</InfoInput>
 				</div>
 				<div className="input-container">
-					<select>
+					<select 
+						onChange={(e) => props.dispatch(actions.currency.update(e.target.value))}>
 						{currencyList.map((currency, index) => (
-							<option key={index} defaultValue={currency.symbol}>{currency.name}</option>
+							<option 
+							key={index} 
+							value={currency.symbol}>
+								{currency.name}
+							</option>
 						))}
 					</select>
 				</div>
