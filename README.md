@@ -1,31 +1,42 @@
-## Angular Invoicing
+# Angular Invoicing React Port
+
+## About it
+
+A React port of angular-invoicing. From the original [Angular Invoicing](https://metaware.github.io/angular-invoicing) repository:
 
 Use this extremely small and lightweight project built in Angular JS to build your one off Invoices. No monthly fees, No Subscriptions - No heavy duty features, Just simple invoices.
 
-## Usage
+## Usage/running the project
 
-Use this project here: [Angular Invoicing](http://metaware.github.io/angular-invoicing) or clone it and customize it to your hearts content.
+Clone this repository: [React Invoicing](https://github.com/emanu-dev/react-invoicing), and run the following commands:
+```
+// Install packages
+$ npm install
 
-## Feature Requests
+// Build scripts using browserify
+$ npm run build
 
-Feel free to open any issues/pull requests if you have any feature requests.
-
+// Run on localhost:3000 using lite-server
+$ npm run serve
+```
 ## Roadmap
 
-* Add Discounts feature
+* ~~Add Discounts feature~~ DONE
+* Delete every aspect of AngularJS
+* Add Webpack build
 * Add multiple currency support
 
-
-## Contributors
+## Original Contributors
 
 * [Manpreet Singh](http://github.com/manpreetrules)
 * [Jasdeep Singh](http://jasdeep.ca)
 * [William Yaworsky](https://github.com/yaworsw)
 
-##Demo Link
-    http://metaware.github.io/angular-invoicing/
+## Demo Link
+[https://react-invoicing.netlify.app/](https://react-invoicing.netlify.app/)
 
 
 ## License
+Same as the original [Angular Invoicing](https://metaware.github.io/angular-invoicing) project:
 
 No license restrictions, use it however and wherever you want - Commercial, Personal, Non-profit however you please. Just send us a quick note letting us know this project came handy and we'll be flattered. :)
