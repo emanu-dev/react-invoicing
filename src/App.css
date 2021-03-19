@@ -67,6 +67,16 @@ input:focus {
 .logo-container {
   text-align:right;
 }
+.logo-button {
+  color:#357EBD;
+  background: transparent;
+  border: none;
+}
+
+.logo-button:hover {
+  color:#5fa6f1;
+}
+
 .infos .right {
   text-align:right;
 }

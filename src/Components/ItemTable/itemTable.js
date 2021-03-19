@@ -16,10 +16,12 @@ const ItemTable = props => {
 
 	React.useEffect(()=>{
 		getItems();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 
 	React.useEffect(()=>{
 		saveItems();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [items]);
 
 	const invoiceSubTotal = () => {
@@ -32,7 +34,7 @@ const ItemTable = props => {
 	};
 
 	const getItems = () => {
-		if (localStorage['item'] === '' || localStorage['item'] === null || localStorage['item'] == undefined) {
+		if (localStorage['item'] === '' || localStorage['item'] === null || localStorage['item'] === undefined) {
 			saveItems();
 		}else{
 			props.dispatch(actions.item.set(
@@ -69,16 +71,14 @@ const ItemTable = props => {
 			<div className="row invoice-item">
 			{!props.state.printMode &&
 			<div className="col-xs-12 add-item-container">
-					<a
+					<button
 						className="btn btn-primary"
-						href='#'
 						onClick={
 							(e) => {
-								e.preventDefault();
 								props.dispatch(actions.item.add())
 							}
 						}
-					>[+]</a>
+					>[+]</button>
 				</div>}
 			</div>
 			<div className="row">
