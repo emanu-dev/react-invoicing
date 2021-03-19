@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import Header from './Components/Header'
 import InfoArea from './Components/InfoArea';
 import ItemTable from './Components/ItemTable';
@@ -6,7 +8,7 @@ import ActionArea from './Components/ActionArea';
 import Credits from './Components/Credits';
 import './App.css';
 
-function App() {
+const App = props => {
   return (
 		<>
 		<link
@@ -20,10 +22,12 @@ function App() {
         <ItemTable />
         <ActionArea />
       </div>
-      <Credits />
+      {!props.state.printMode && <Credits />}
     </div>
 		</>
   );
 }
 
-export default App;
+const mapStatesToProps = state => ({ state })
+
+export default connect(mapStatesToProps)(App);

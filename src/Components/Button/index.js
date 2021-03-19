@@ -1,17 +1,14 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import store from '../../store';
+import { connect } from 'react-redux';
 
-import Button from './button';
-
-const ButtonContainer = props => {
+const Button = props => {
   return (
-    <Provider store={store}>
-      <Button
-      {...props}
-      />
-    </Provider>
+    <button className="btn btn-primary" onClick={props.onClick}>
+      {props.children}
+    </button>
   )
 }
 
-export default ButtonContainer;
+const mapStatesToProps = state => ({ state })
+
+export default connect(mapStatesToProps)(Button);

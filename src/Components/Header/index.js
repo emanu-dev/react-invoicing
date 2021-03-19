@@ -4,6 +4,12 @@ import Logo from '../Logo';
 import InfoInput from '../InfoInput';
 
 const Header = () => {
+  const invoiceNumberEl = React.useRef(null);
+
+  React.useEffect(() => {
+    invoiceNumberEl.current.focus();
+  }, [])
+
   return (
     <>
       <div className="row">
@@ -15,6 +21,7 @@ const Header = () => {
         <div className="col-xs-6">
           <div className="invoice-number-container">
             <InfoInput
+              innerRef={invoiceNumberEl}
 							label="Invoice #"
 							id="invoice-number"
 							type="text"
