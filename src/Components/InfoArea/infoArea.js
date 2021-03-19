@@ -9,12 +9,28 @@ const InfoArea = props => {
 
 	const currencyList = props.state.currency.availableCurrency;
 
+	const getInfo = () => {
+		if (localStorage['info'] === '' || localStorage['info'] === null || localStorage['info'] === undefined) {
+			saveInfo();
+		} else {
+			props.dispatch(actions.info.set(
+				JSON.parse(localStorage['info'])
+			))
+		}
+	}
+
+	const saveInfo = () => {
+		localStorage['info'] = JSON.stringify(props.state.info)
+	}
+
 	React.useEffect(() => {
 		getInfo();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	React.useEffect(() => {
 		saveInfo();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [props.state.info])
 
 	React.useEffect(() => {
@@ -40,22 +56,8 @@ const InfoArea = props => {
 					}
 				)
 		}
-
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [props.state.currency.symbol, props.state.currency.toConvertCurrency])
-
-	const getInfo = () => {
-		if (localStorage['info'] === '' || localStorage['info'] === null || localStorage['info'] == undefined) {
-			saveInfo();
-		} else {
-			props.dispatch(actions.info.set(
-				JSON.parse(localStorage['info'])
-			))
-		}
-	}
-
-	const saveInfo = () => {
-		localStorage['info'] = JSON.stringify(props.state.info)
-	}
 
 	return (
 		<div className="row infos">

@@ -20,15 +20,13 @@ const Item = props => {
 	return (
 		<div className="row invoice-item">
 			<div className="col-xs-1 remove-item-container">
-			{!props.state.printMode && <a
+			{!props.state.printMode && <button
 					className="btn btn-danger"
-					href='#'
 					onClick={
 						(e) => {
-							e.preventDefault();
 							props.dispatch(actions.item.remove(props.index))
 						}}
-				>[X]</a>}
+				>[X]</button>}
 			</div>
 			<div className="col-xs-3 input-container">
 				<input
@@ -77,13 +75,13 @@ const Item = props => {
 					decimalScale={2}
 					displayType="text"
 					prefix={prefix}
-				/><span> (
+				/>{!(convertedPrefix === '') && <span> (
 				<NumberFormat
-					value={props.item.cost * props.item.qty - calculateDiscount() * currencyConversionMultiplier}
+					value={(props.item.cost * props.item.qty - calculateDiscount()) * currencyConversionMultiplier}
 					decimalScale={2}
 					displayType="text"
 					prefix={convertedPrefix}
-				/>)</span>
+				/>)</span>}
 			</div>
 		</div>
 	)

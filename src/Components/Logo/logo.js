@@ -15,14 +15,16 @@ const Logo = props => {
 		}else{
 			localStorage['logo'] = props.state.logo;
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	React.useEffect(() => {
     localStorage['logo'] = props.state.logo;
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[props.state.logo])
 
 	const hasLogo = () => {
-		return !(localStorage['logo'] === '' || localStorage['logo'] === null || localStorage['logo'] == undefined);
+		return !(localStorage['logo'] === '' || localStorage['logo'] === null || localStorage['logo'] === undefined);
 	};
 
 	const toggleLogo = () => {
@@ -59,20 +61,16 @@ const Logo = props => {
 				(e) => {
 					readUrl(e.target)
 				}} />
-		{!hide && <img src={props.state.logo} width={props.width} />}
+		{!hide && <img src={props.state.logo} width={props.width} alt='logo' />}
 		<div>
-			<a
+			<button className='logo-button'
 				onClick={(e) => {
-					e.preventDefault();
 					editLogo()
-				}}
-				href='#'>Edit Logo </a>
-			<a
+				}}>Edit Logo </button>
+			<button className='logo-button'
 				onClick={(e) => {
-					e.preventDefault();
 					toggleLogo(false)
-				}}
-				href='#'>{`${hide ? 'Show' : 'Hide'} `}logo</a>
+				}}>{`${hide ? 'Show' : 'Hide'} `}logo</button>
 		</div>
 	</div>		
 	)
