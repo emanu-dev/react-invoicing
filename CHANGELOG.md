@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/emanu-dev/react-invoicing/compare/v0.2.0...v0.2.1) (2021-03-19)
+
+
+### Features
+
+* add currency conversion ([241eb77](https://github.com/emanu-dev/react-invoicing/commit/241eb779a5447ee853f47a01abc82aed5f9c9b3c))
+
+
+### Bug Fixes
+
+* fix currency conversion not updating ([e576cb6](https://github.com/emanu-dev/react-invoicing/commit/e576cb6ff382d326c8d16619334f7547ba81b838))
+
 ## 0.2.0 (2021-03-18)
 
 
