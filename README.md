@@ -8,23 +8,20 @@ Use this extremely small and lightweight project built in Angular JS to build yo
 
 ## Usage/running the project
 
-Clone this repository: [React Invoicing](https://github.com/emanu-dev/react-invoicing), and run the following commands:
+Clone this repository: [React Invoicing](https://github.com/emanu-dev/react-invoicing), or download the lastest release, and run the following commands:
 ```
 // Install packages
 $ npm install
 
-// Build scripts using browserify
-$ npm run build
-
-// Run on localhost:3000 using lite-server
-$ npm run serve
+// Run development server
+$ npm start
 ```
 ## Roadmap
 
 * ~~Add Discounts feature~~ DONE
-* Delete every aspect of AngularJS
-* Add Webpack build
-* Add multiple currency support
+* ~~Delete every aspect of AngularJS~~ DONE
+* ~~Add Webpack build~~ DONE
+* ~~Add multiple currency support~~ DONE
 
 ## Original Contributors
 
