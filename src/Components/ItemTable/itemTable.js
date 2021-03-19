@@ -90,13 +90,13 @@ const ItemTable = props => {
 						displayType="text"
 						prefix={prefix}
 					/>					
-				<span> (
+				{!(convertedPrefix === '') && <span> (
 					<NumberFormat 
 						value={invoiceSubTotal() * currencyConversionMultiplier}
 						decimalScale={2}
 						displayType="text"
 						prefix={convertedPrefix}
-					/>)</span>					
+					/>)</span>}
 				</div>
 			</div>
 			<div className="row">
@@ -118,13 +118,13 @@ const ItemTable = props => {
 						displayType="text"
 						prefix={prefix}
 					/>
-					<span> (
+					{!(convertedPrefix === '') && <span> (
 					<NumberFormat 
 						value={calculateTax() * currencyConversionMultiplier}
 						decimalScale={2}
 						displayType="text"
 						prefix={convertedPrefix}
-					/>)</span>		
+					/>)</span>}
 				</div>
 			</div>
 			<div className="row">
@@ -136,13 +136,13 @@ const ItemTable = props => {
 						displayType="text"
 						prefix={prefix}
 					/>
-					<span> (
+					{!(convertedPrefix === '') && <span> (
 					<NumberFormat 
 						value={calculateGrandTotal() * currencyConversionMultiplier}
 						decimalScale={2}
 						displayType="text"
 						prefix={convertedPrefix}
-					/>)</span>		
+					/>)</span>}		
 				</div>
 			</div>
 		</div>

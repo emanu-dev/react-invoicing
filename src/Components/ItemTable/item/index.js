@@ -77,13 +77,13 @@ const Item = props => {
 					decimalScale={2}
 					displayType="text"
 					prefix={prefix}
-				/><span> (
+				/>{!(convertedPrefix === '') && <span> (
 				<NumberFormat
-					value={props.item.cost * props.item.qty - calculateDiscount() * currencyConversionMultiplier}
+					value={(props.item.cost * props.item.qty - calculateDiscount()) * currencyConversionMultiplier}
 					decimalScale={2}
 					displayType="text"
 					prefix={convertedPrefix}
-				/>)</span>
+				/>)</span>}
 			</div>
 		</div>
 	)
