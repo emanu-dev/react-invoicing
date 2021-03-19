@@ -11,6 +11,8 @@ const ItemTable = props => {
 	const items = props.state.item;
 	const tax = props.state.info.invoice.tax;
 	const prefix = props.state.currency.symbol;
+	const convertedPrefix = props.state.currency.toConvertCurrency;
+	const currencyConversionMultiplier = props.state.currency.currencyConversionMultiplier;
 
 	React.useEffect(()=>{
 		getItems();
@@ -80,46 +82,67 @@ const ItemTable = props => {
 				</div>}
 			</div>
 			<div className="row">
-				<div className="col-xs-10 text-right">Sub Total</div>
-				<div className="col-xs-2 text-right">
+				<div className="col-xs-9 text-right">Sub Total</div>
+				<div className="col-xs-3 text-right">
 					<NumberFormat 
 						value={invoiceSubTotal()}
 						decimalScale={2}
 						displayType="text"
 						prefix={prefix}
 					/>					
+				<span> (
+					<NumberFormat 
+						value={invoiceSubTotal() * currencyConversionMultiplier}
+						decimalScale={2}
+						displayType="text"
+						prefix={convertedPrefix}
+					/>)</span>					
 				</div>
 			</div>
 			<div className="row">
-				<div className="col-xs-10 text-right">Tax(%): 
+				<div className="col-xs-9 text-right">Tax(%): 
 					<InfoInput 
 					id="invoice__tax"
 					type="text"
 					info="invoice"
 					name="tax"
 					style={{ 
-						width: "43px",
+						width: "38px",
 					}}
 					/>
 				</div>
-				<div className="col-xs-2 text-right">
+				<div className="col-xs-3 text-right">
 					<NumberFormat 
 						value={calculateTax()}
 						decimalScale={2}
 						displayType="text"
 						prefix={prefix}
 					/>
+					<span> (
+					<NumberFormat 
+						value={calculateTax() * currencyConversionMultiplier}
+						decimalScale={2}
+						displayType="text"
+						prefix={convertedPrefix}
+					/>)</span>		
 				</div>
 			</div>
 			<div className="row">
-				<div className="col-xs-10 text-right">Grand Total:</div>
-				<div className="col-xs-2 text-right">
+				<div className="col-xs-9 text-right">Grand Total:</div>
+				<div className="col-xs-3 text-right">
 					<NumberFormat 
 						value={calculateGrandTotal()}
 						decimalScale={2}
 						displayType="text"
 						prefix={prefix}
 					/>
+					<span> (
+					<NumberFormat 
+						value={calculateGrandTotal() * currencyConversionMultiplier}
+						decimalScale={2}
+						displayType="text"
+						prefix={convertedPrefix}
+					/>)</span>		
 				</div>
 			</div>
 		</div>

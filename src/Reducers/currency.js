@@ -1,30 +1,37 @@
 const defaultCurrency = {
   symbol: '$',
-  toConvertCurrency: '$',
+  toConvertCurrency: '',
+  currencyConversionMultiplier: '1',
   availableCurrency: [
     {
       name: 'US Dollar ($)',
-      symbol: '$'
+      symbol: '$',
+      code: 'USD'
     },
     {
       name: 'British Pound (£)',
-      symbol: '£'
+      symbol: '£',
+      code: 'GBP'
     },
     {
       name: 'Canadian Dollar ($)',
-      symbol: 'CAD $ '
+      symbol: 'CAD $ ',
+      code: 'CAD'
     },
     {
       name: 'Euro (€)',
-      symbol: '€'
+      symbol: '€',
+      code: 'EUR'
     },
     {
       name: 'Indian Rupee (₹)',
-      symbol: '₹'
+      symbol: '₹',
+      code: 'INR'
     },
     {
       name: 'Norwegian krone (kr)',
-      symbol: 'kr '
+      symbol: 'kr ',
+      code: 'NOK'
     }
   ]
 };
@@ -36,6 +43,16 @@ const currencyReducer = (state = defaultCurrency, action) => {
         ...state,
         symbol: action.symbol
       }
+    case 'CONVERT-CURRENCY-UPDATE':
+      return {
+        ...state,
+        toConvertCurrency: action.toConvertCurrency
+      }
+    case 'CONVERT-CURRENCY-SET':
+      return {
+        ...state,
+        currencyConversionMultiplier: action.currencyConversionMultiplier
+      }            
     default: 
       return state;
   }
