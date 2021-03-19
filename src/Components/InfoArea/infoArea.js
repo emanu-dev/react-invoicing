@@ -17,6 +17,32 @@ const InfoArea = props => {
 		saveInfo();
 	}, [props.state.info])
 
+	React.useEffect(() => {
+		const originCurrencyObj = currencyList.find(
+			(currency => currency.symbol === props.state.currency.symbol)
+		)
+
+		const conversionCurrencyObj = currencyList.find(
+			(currency => currency.symbol === props.state.currency.toConvertCurrency)
+		)
+
+		if (conversionCurrencyObj === undefined) {
+			props.dispatch(actions.currency.setConvert(1))
+		} else {
+			fetch(`https://free.currconv.com/api/v7/convert?q=${originCurrencyObj.code}_${conversionCurrencyObj.code}&compact=ultra&apiKey=882c8d5c37ab473b4691`)
+				.then(res => res.json())
+				.then(
+					(result) => {
+						props.dispatch(actions.currency.setConvert(result[`${originCurrencyObj.code}_${conversionCurrencyObj.code}`]))
+					},
+					(error) => {
+						console.err(error)
+					}
+				)
+		}
+
+	}, [props.state.currency.symbol, props.state.currency.toConvertCurrency])
+
 	const getInfo = () => {
 		if (localStorage['info'] === '' || localStorage['info'] === null || localStorage['info'] == undefined) {
 			saveInfo();
@@ -56,16 +82,31 @@ const InfoArea = props => {
 				</div>
 				<div className="input-container">
 					{!props.state.printMode &&
-					<select 
-						onChange={(e) => props.dispatch(actions.currency.update(e.target.value))}>
-						{currencyList.map((currency, index) => (
-							<option 
-							key={index} 
-							value={currency.symbol}>
-								{currency.name}
-							</option>
-						))}
-					</select>}
+						<select
+							onChange={(e) => props.dispatch(actions.currency.update(e.target.value))}>
+							{currencyList.map((currency, index) => (
+								<option
+									key={index}
+									value={currency.symbol}>
+									{currency.name}
+								</option>
+							))}
+						</select>
+					}
+					{!props.state.printMode && <span> → </span>}
+					{!props.state.printMode &&
+						<select
+							onChange={(e) => props.dispatch(actions.currency.updateConvert(e.target.value))}>
+							<option value=''>Select currency to convert</option>
+							{currencyList.map((currency, index) => (
+								<option
+									key={index}
+									value={currency.symbol}>
+									{currency.name}
+								</option>
+							))}
+						</select>
+					}
 				</div>
 			</div>
 			<div className="col-xs-6 right">

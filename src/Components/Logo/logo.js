@@ -54,6 +54,7 @@ const Logo = props => {
 			type="file"
 			ref={imgInp}
 			id="imgInp"
+			accept="image/*"
 			onChange={
 				(e) => {
 					readUrl(e.target)

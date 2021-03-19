@@ -99,8 +99,6 @@ input, textarea{
     border: 1px solid #F9F9F9;
 }
 
-
-
 @media print {
     .noPrint {
         display:none;

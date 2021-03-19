@@ -6,6 +6,8 @@ import NumberFormat from 'react-number-format';
 const Item = props => {
 
 	const prefix = props.state.currency.symbol;
+	const convertedPrefix = props.state.currency.toConvertCurrency;
+	const currencyConversionMultiplier = props.state.currency.currencyConversionMultiplier;
 
 	const calculateDiscount = () => {
 		return (props.item.cost * props.item.qty * (props.item.discount / 100))
@@ -59,7 +61,7 @@ const Item = props => {
 					}}
 				/>
 			</div>
-			<div className="col-xs-2 input-container">
+			<div className="col-xs-1 input-container">
 				<input
 					size="6"
 					placeholder="%"
@@ -69,14 +71,19 @@ const Item = props => {
 					}}
 				/>
 			</div>
-			<div className="col-xs-2 text-right input-container">
+			<div className="col-xs-3 text-right input-container">
 				<NumberFormat
 					value={props.item.cost * props.item.qty - calculateDiscount()}
 					decimalScale={2}
 					displayType="text"
 					prefix={prefix}
-				/>
-
+				/><span> (
+				<NumberFormat
+					value={props.item.cost * props.item.qty - calculateDiscount() * currencyConversionMultiplier}
+					decimalScale={2}
+					displayType="text"
+					prefix={convertedPrefix}
+				/>)</span>
 			</div>
 		</div>
 	)
