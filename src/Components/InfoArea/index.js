@@ -39,7 +39,7 @@ const InfoArea = props => {
 		)
 
 		const conversionCurrencyObj = currencyList.find(
-			(currency => currency.symbol === props.state.currency.toConvertCurrency)
+			(currency => currency.symbol === props.state.currency.convertSymbol)
 		)
 
 		if (conversionCurrencyObj === undefined) {
@@ -57,7 +57,7 @@ const InfoArea = props => {
 				)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [props.state.currency.symbol, props.state.currency.toConvertCurrency])
+	}, [props.state.currency.symbol, props.state.currency.convertSymbol])
 
 	return (
 		<div className="row infos">
@@ -113,24 +113,19 @@ const InfoArea = props => {
 			</div>
 			<div className="col-xs-6 right">
 				<div className="input-container">
-					<InfoInput id='company_info__name' type='text' info='company_info' name='name'>
-					</InfoInput>
+					<InfoInput id='company_info__name' type='text' info='company_info' name='name' />
 				</div>
 				<div className="input-container">
-					<InfoInput id='company_info__web_link' type='text' info='company_info' name='web_link'>
-					</InfoInput>
+					<InfoInput id='company_info__web_link' type='text' info='company_info' name='web_link' />
 				</div>
 				<div className="input-container">
-					<InfoInput id='company_info__address1' type='text' info='company_info' name='address1'>
-					</InfoInput>
+					<InfoInput id='company_info__address1' type='text' info='company_info' name='address1' />
 				</div>
 				<div className="input-container">
-					<InfoInput id='company_info__address2' type='text' info='company_info' name='address2'>
-					</InfoInput>
+					<InfoInput id='company_info__address2' type='text' info='company_info' name='address2' />
 				</div>
 				<div className="input-container">
-					<InfoInput id='company_info__postal' type='text' info='company_info' name='postal'>
-					</InfoInput>
+					<InfoInput id='company_info__postal' type='text' info='company_info' name='postal' />
 				</div>
 			</div>
 		</div>

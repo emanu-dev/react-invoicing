@@ -1,6 +1,6 @@
-const update = (symbol) => ({type: 'CURRENCY-UPDATE', symbol: symbol});
-const updateConvert = (toConvertCurrency) => ({type: 'CONVERT-CURRENCY-UPDATE', toConvertCurrency: toConvertCurrency});
-const setConvert = (currencyConversionMultiplier) => ({type: 'CONVERT-CURRENCY-SET', currencyConversionMultiplier: currencyConversionMultiplier});
+const update = (symbol) => ({type: 'SYMBOL-UPDATE', symbol: symbol});
+const updateConvert = (convertSymbol) => ({type: 'CONVERT-UPDATE', convertSymbol: convertSymbol});
+const setConvert = (convertValue) => ({type: 'CONVERT-SET-VALUE', convertValue: convertValue});
 
 const Currency = {
   update,

@@ -5,16 +5,21 @@ import NumberFormat from 'react-number-format';
 
 const Item = props => {
 
-	const prefix = props.state.currency.symbol;
-	const convertedPrefix = props.state.currency.toConvertCurrency;
-	const currencyConversionMultiplier = props.state.currency.currencyConversionMultiplier;
+	const symbol = props.state.currency.symbol;
+	const convertSymbol = props.state.currency.convertSymbol;
+	const convertValue = props.state.currency.convertValue;
+	const item = props.item;
 
 	const calculateDiscount = () => {
-		return (props.item.cost * props.item.qty * (props.item.discount / 100))
+		return (item.cost * item.qty * (item.discount / 100))
+	}
+
+	const calculateTotal = () => {
+		return item.cost * item.qty - calculateDiscount();
 	}
 
 	const removeFormatting = (string) => {
-		return parseFloat(string.replace(prefix, ""));
+		return parseFloat(string.replace(symbol, ""));
 	}
 
 	return (
@@ -31,7 +36,7 @@ const Item = props => {
 			<div className="col-xs-3 input-container">
 				<input
 					placeholder="Description"
-					value={props.item.description}
+					value={item.description}
 					onChange={(e) => {
 						props.dispatch(actions.item.update(props.index, 'description', e.target.value))
 					}}
@@ -41,7 +46,7 @@ const Item = props => {
 				<input
 					size="4"
 					placeholder="Quantity"
-					value={props.item.qty}
+					value={item.qty}
 					onChange={(e) => {
 						props.dispatch(actions.item.update(props.index, 'qty', e.target.value))
 					}}
@@ -51,8 +56,8 @@ const Item = props => {
 				<NumberFormat
 					size="6"
 					placeholder="Cost"
-					value={props.item.cost}
-					prefix={prefix}
+					value={item.cost}
+					prefix={symbol}
 					isNumericString={true}
 					onChange={(e) => {
 						props.dispatch(actions.item.update(props.index, 'cost', removeFormatting(e.target.value)))
@@ -63,7 +68,7 @@ const Item = props => {
 				<input
 					size="6"
 					placeholder="%"
-					value={props.item.discount}
+					value={item.discount}
 					onChange={(e) => {
 						props.dispatch(actions.item.update(props.index, 'discount', e.target.value))
 					}}
@@ -71,16 +76,16 @@ const Item = props => {
 			</div>
 			<div className="col-xs-3 text-right input-container">
 				<NumberFormat
-					value={props.item.cost * props.item.qty - calculateDiscount()}
+					value={calculateTotal()}
 					decimalScale={2}
 					displayType="text"
-					prefix={prefix}
-				/>{!(convertedPrefix === '') && <span> (
+					prefix={symbol}
+				/>{!(convertSymbol === '') && <span> (
 				<NumberFormat
-					value={(props.item.cost * props.item.qty - calculateDiscount()) * currencyConversionMultiplier}
+					value={calculateTotal() * convertValue}
 					decimalScale={2}
 					displayType="text"
-					prefix={convertedPrefix}
+					prefix={convertSymbol}
 				/>)</span>}
 			</div>
 		</div>

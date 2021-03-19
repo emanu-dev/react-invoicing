@@ -1,7 +1,7 @@
 const defaultCurrency = {
   symbol: '$',
-  toConvertCurrency: '',
-  currencyConversionMultiplier: '1',
+  convertSymbol: '',
+  convertValue: '1',
   availableCurrency: [
     {
       name: 'US Dollar ($)',
@@ -38,20 +38,20 @@ const defaultCurrency = {
 
 const currencyReducer = (state = defaultCurrency, action) => {
   switch (action.type){
-    case 'CURRENCY-UPDATE':
+    case 'SYMBOL-UPDATE':
       return {
         ...state,
         symbol: action.symbol
       }
-    case 'CONVERT-CURRENCY-UPDATE':
+    case 'CONVERT-UPDATE':
       return {
         ...state,
-        toConvertCurrency: action.toConvertCurrency
+        convertSymbol: action.convertSymbol
       }
-    case 'CONVERT-CURRENCY-SET':
+    case 'CONVERT-SET-VALUE':
       return {
         ...state,
-        currencyConversionMultiplier: action.currencyConversionMultiplier
+        convertValue: action.convertValue
       }            
     default: 
       return state;

@@ -10,9 +10,9 @@ const ItemTable = props => {
 
 	const items = props.state.item;
 	const tax = props.state.info.invoice.tax;
-	const prefix = props.state.currency.symbol;
-	const convertedPrefix = props.state.currency.toConvertCurrency;
-	const currencyConversionMultiplier = props.state.currency.currencyConversionMultiplier;
+	const symbol = props.state.currency.symbol;
+	const convertSymbol = props.state.currency.convertSymbol;
+	const convertValue = props.state.currency.convertValue;
 
 	React.useEffect(()=>{
 		getItems();
@@ -23,15 +23,6 @@ const ItemTable = props => {
 		saveItems();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [items]);
-
-	const invoiceSubTotal = () => {
-		var total = 0.00;
-		items.forEach((item) => {
-			total += (item.qty * item.cost - (item.cost * item.qty * (item.discount/100)));
-		});
-		
-		return total;
-	};
 
 	const getItems = () => {
 		if (localStorage['item'] === '' || localStorage['item'] === null || localStorage['item'] === undefined) {
@@ -46,7 +37,16 @@ const ItemTable = props => {
 	const saveItems = () => {
 		localStorage['item'] = JSON.stringify(items)
 	}
-
+	
+	const invoiceSubTotal = () => {
+		var total = 0.00;
+		items.forEach((item) => {
+			total += (item.qty * item.cost - (item.cost * item.qty * (item.discount/100)));
+		});
+		
+		return total;
+	};
+	
 	const calculateTax = () => {
 		return ((tax * invoiceSubTotal()) / 100);
 	};
@@ -71,78 +71,38 @@ const ItemTable = props => {
 			<div className="row invoice-item">
 			{!props.state.printMode &&
 			<div className="col-xs-12 add-item-container">
-					<button
-						className="btn btn-primary"
-						onClick={
-							(e) => {
-								props.dispatch(actions.item.add())
-							}
-						}
+					<button className="btn btn-primary" onClick={() => {props.dispatch(actions.item.add())}}
 					>[+]</button>
 				</div>}
 			</div>
 			<div className="row">
 				<div className="col-xs-9 text-right">Sub Total</div>
 				<div className="col-xs-3 text-right">
-					<NumberFormat 
-						value={invoiceSubTotal()}
-						decimalScale={2}
-						displayType="text"
-						prefix={prefix}
-					/>					
-				{!(convertedPrefix === '') && <span> (
-					<NumberFormat 
-						value={invoiceSubTotal() * currencyConversionMultiplier}
-						decimalScale={2}
-						displayType="text"
-						prefix={convertedPrefix}
-					/>)</span>}
+					<NumberFormat value={invoiceSubTotal()} decimalScale={2} displayType="text" prefix={symbol} />					
+				{!(convertSymbol === '') && <span> (
+					<NumberFormat value={invoiceSubTotal() * convertValue} decimalScale={2} displayType="text" prefix={convertSymbol}
+					/>)
+					</span>}
 				</div>
 			</div>
 			<div className="row">
 				<div className="col-xs-9 text-right">Tax(%): 
-					<InfoInput 
-					id="invoice__tax"
-					type="text"
-					info="invoice"
-					name="tax"
-					style={{ 
-						width: "38px",
-					}}
-					/>
+					<InfoInput id="invoice__tax" type="text" info="invoice" name="tax" style={{ width: "38px" }} />
 				</div>
 				<div className="col-xs-3 text-right">
-					<NumberFormat 
-						value={calculateTax()}
-						decimalScale={2}
-						displayType="text"
-						prefix={prefix}
-					/>
-					{!(convertedPrefix === '') && <span> (
-					<NumberFormat 
-						value={calculateTax() * currencyConversionMultiplier}
-						decimalScale={2}
-						displayType="text"
-						prefix={convertedPrefix}
-					/>)</span>}
+					<NumberFormat value={calculateTax()} decimalScale={2} displayType="text" prefix={symbol} />
+					{!(convertSymbol === '') && <span> (
+					<NumberFormat value={calculateTax() * convertValue} decimalScale={2} displayType="text" prefix={convertSymbol}/>
+					)</span>}
 				</div>
 			</div>
 			<div className="row">
 				<div className="col-xs-9 text-right">Grand Total:</div>
 				<div className="col-xs-3 text-right">
-					<NumberFormat 
-						value={calculateGrandTotal()}
-						decimalScale={2}
-						displayType="text"
-						prefix={prefix}
-					/>
-					{!(convertedPrefix === '') && <span> (
-					<NumberFormat 
-						value={calculateGrandTotal() * currencyConversionMultiplier}
-						decimalScale={2}
-						displayType="text"
-						prefix={convertedPrefix}
-					/>)</span>}		
+					<NumberFormat value={calculateGrandTotal()} decimalScale={2} displayType="text" prefix={symbol}/>
+					{!(convertSymbol === '') && <span> (
+					<NumberFormat value={calculateGrandTotal() * convertValue} decimalScale={2} displayType="text" prefix={convertSymbol}
+					/>)</span>}
 				</div>
 			</div>
 		</div>
